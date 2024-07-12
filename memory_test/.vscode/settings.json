@@ -1,0 +1,20 @@
+{
+    "files.associations": {
+        "optional": "c",
+        "istream": "c",
+        "ostream": "c",
+        "ratio": "c",
+        "system_error": "c",
+        "array": "c",
+        "functional": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "utility": "c",
+        "zcu102_sender_global.h": "c",
+        "iostream": "cpp",
+        "*.tcc": "c",
+        "fstream": "c",
+        "string": "cpp",
+        "string_view": "cpp"
+    }
+}
