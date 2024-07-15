@@ -37,10 +37,10 @@ def hex_to_bin(hex_file, bin_file):
 
 
 # 使用示例 main
-hex_file = '/home/cwb/work_py/make_pattern/mscan_result.hex'
-bin_file = '/home/cwb/work_py/make_pattern/mscan_result.bin'
-hex_to_bin(hex_file, bin_file)
+hex_file = '/home/cwb/work_py/make_pattern/March_C+_result.hex'
+bin_file = '/home/cwb/work_py/make_pattern/March_C+_result.bin'
 
+hex_to_bin(hex_file, bin_file)
 
 print("hex2bin done")
 
