@@ -192,6 +192,99 @@ def make_mix_pattern_4step_sub(instruction1, data1, instruction2, data2, instruc
             hex_string = instruction4 + '{:04X}'.format(i) + data4
             f.write(hex_string + '\n')
 
+def make_mix_pattern_5step(instruction1, data1, instruction2, data2, instruction3, data3, instruction4, data4, instruction5, data5, txt_mode, txt_name):
+
+    # 定义起始和结束的16进制字符串
+    # start_hex = '02000000'
+    # end_hex = '027fff00'
+
+    # 将16进制字符串转换为整数
+    start_int = int('0x0000', 16)
+    end_int = int('0x7fff', 16)
+
+    # 打开文件进行写入
+    with open(txt_name, txt_mode) as f:       
+        # 循环生成序列并写入文件
+        for i in range(start_int, end_int + 1, 1):
+
+            hex_string = instruction1 + '{:04X}'.format(i) + data1   # 将整数转换为16进制字符串，去掉开头的'0x'并填充到8位               
+            f.write(hex_string + '\n')  # 写入每个16进制字符串到文件，每个字符串占一行
+
+            hex_string = instruction2 + '{:04X}'.format(i) + data2
+            f.write(hex_string + '\n')
+
+            hex_string = instruction3 + '{:04X}'.format(i) + data3
+            f.write(hex_string + '\n')
+
+            hex_string = instruction4 + '{:04X}'.format(i) + data4
+            f.write(hex_string + '\n')
+
+            hex_string = instruction5 + '{:04X}'.format(i) + data5
+            f.write(hex_string + '\n')
+
+def make_mix_pattern_5step_sub(instruction1, data1, instruction2, data2, instruction3, data3, instruction4, data4, instruction5, data5, txt_mode, txt_name):
+
+    # 定义起始和结束的16进制字符串
+    # start_hex = '02000000'
+    # end_hex = '027fff00'
+
+    # 将16进制字符串转换为整数
+    start_int = int('0x7fff', 16)
+    end_int = int('0x0000', 16)
+
+    # 打开文件进行写入
+    with open(txt_name, txt_mode) as f:       
+        # 循环生成序列并写入文件
+        for i in range(start_int, end_int - 1, -1):
+
+            hex_string = instruction1 + '{:04X}'.format(i) + data1   # 将整数转换为16进制字符串，去掉开头的'0x'并填充到8位               
+            f.write(hex_string + '\n')  # 写入每个16进制字符串到文件，每个字符串占一行
+
+            hex_string = instruction2 + '{:04X}'.format(i) + data2
+            f.write(hex_string + '\n')
+
+            hex_string = instruction3 + '{:04X}'.format(i) + data3
+            f.write(hex_string + '\n')
+
+            hex_string = instruction4 + '{:04X}'.format(i) + data4
+            f.write(hex_string + '\n')
+
+            hex_string = instruction5 + '{:04X}'.format(i) + data5
+            f.write(hex_string + '\n')
+
+def make_mix_pattern_6step(instruction1, data1, instruction2, data2, instruction3, data3, instruction4, data4, instruction5, data5, instruction6, data6, txt_mode, txt_name):
+
+    # 定义起始和结束的16进制字符串
+    # start_hex = '02000000'
+    # end_hex = '027fff00'
+
+    # 将16进制字符串转换为整数
+    start_int = int('0x0000', 16)
+    end_int = int('0x7fff', 16)
+
+    # 打开文件进行写入
+    with open(txt_name, txt_mode) as f:       
+        # 循环生成序列并写入文件
+        for i in range(start_int, end_int + 1, 1):
+
+            hex_string = instruction1 + '{:04X}'.format(i) + data1   # 将整数转换为16进制字符串，去掉开头的'0x'并填充到8位               
+            f.write(hex_string + '\n')  # 写入每个16进制字符串到文件，每个字符串占一行
+
+            hex_string = instruction2 + '{:04X}'.format(i) + data2
+            f.write(hex_string + '\n')
+
+            hex_string = instruction3 + '{:04X}'.format(i) + data3
+            f.write(hex_string + '\n')
+
+            hex_string = instruction4 + '{:04X}'.format(i) + data4
+            f.write(hex_string + '\n')
+
+            hex_string = instruction5 + '{:04X}'.format(i) + data5
+            f.write(hex_string + '\n')
+
+            hex_string = instruction6 + '{:04X}'.format(i) + data6
+            f.write(hex_string + '\n')
+
 # function for checkerboard 
 def generate_sequence00(start, end):
     increments = [511, 1]
@@ -302,6 +395,16 @@ def make_marchA_pattern_result():
 # March B
 def make_marchB_pattern():
     pattern_addr_add('02000000', '027fff00', 'w', 'March_B.hex')  #wr 00
+    make_mix_pattern_6step('03', '00', '02', 'ff', '03', '00', '02', '00', '03', '00', '02', 'ff', 'a', 'March_B.hex') # rd 00 wr ff
+    make_mix_pattern_3step('03', '00', '02', '00', '02', 'ff', 'a', 'March_B.hex') # rd ff wr 00 wr ff
+    make_mix_pattern_4step_sub('03', '00', '02', '00', '02', 'ff', '02', '00', 'a', 'March_B.hex') 
+    make_mix_pattern_3step_sub('03', '00', '02', 'ff', '02', '00', 'a', 'March_B.hex')
+
+def make_marchB_pattern_result():
+    make_mix_pattern_3step_sub('00', '00', '00', 'ff', '00', '00', 'w', 'March_B_result.hex')
+    pattern_addr_add('000000ff', '007fffff', 'a', 'March_B_result.hex')  #rd ff
+    pattern_addr_sub('007fffff', '000000ff', 'a', 'March_B_result.hex') # rd ff
+    pattern_addr_sub('007fff00', '00000000', 'a', 'March_B_result.hex') # rd 00
 
 # March C
 def make_marchC_pattern():
@@ -356,9 +459,66 @@ def make_marchCp_pattern_result():
     make_mix_pattern_2step_sub('00', 'ff', '00', '00', 'a', 'March_C+_result.hex') # rd ff rd 00
     pattern_addr_add('00000000', '007fff00', 'a', 'March_C+_result.hex')  #rd 00
 
+# March U
+def make_marchU_pattern():
+    pattern_addr_add('02000000', '027fff00', 'w', 'March_U.hex')  #wr 00
+    make_mix_pattern_4step('03', '00', '02', 'ff', '03', '00', '02', '00', 'a', 'March_U.hex') 
+    make_mix_pattern_2step('03', '00', '02', 'ff', 'a', 'March_U.hex')
+    make_mix_pattern_4step_sub('03', '00', '02', '00', '03', '00', '02', 'ff', 'a', 'March_U.hex') 
+    make_mix_pattern_2step_sub('03', '00', '02', '00', 'a', 'March_U.hex')
 
+def make_marchU_pattern_result():
+    make_mix_pattern_2step('00', '00', '00', 'ff', 'w', 'March_U_result.hex') # rd 00 rd ff
+    pattern_addr_add('00000000', '007fff00', 'a', 'March_U_result.hex')  #rd 00
+    make_mix_pattern_2step_sub('00', 'ff', '00', '00', 'a', 'March_U_result.hex') # rd 00 rd ff
+    pattern_addr_sub('007fffff', '000000ff', 'a', 'March_U_result.hex')  #rd 00
 
+# March LR
+def make_marchLR_pattern():
+    pattern_addr_add('02000000', '027fff00', 'w', 'March_LR.hex')  #wr 00
+    make_mix_pattern_2step_sub('03', '00', '02', 'ff', 'a', 'March_LR.hex')
+    make_mix_pattern_4step('03', '00', '02', '00', '03', '00', '02', 'ff', 'a', 'March_LR.hex') 
+    make_mix_pattern_2step('03', '00', '02', '00', 'a', 'March_LR.hex')
+    make_mix_pattern_4step('03', '00', '02', 'ff', '03', '00', '02', '00', 'a', 'March_LR.hex') 
+    pattern_addr_add('00000000', '007fff00', 'a', 'March_LR.hex')  #rd 00
+   
+def make_marchLR_pattern_result():
+    pattern_addr_sub('007fff00', '00000000', 'w', 'March_LR_result.hex')  #rd 00
+    make_mix_pattern_2step('00', 'ff', '00', '00', 'a', 'March_LR_result.hex') 
+    pattern_addr_add('000000ff', '007fffff', 'a', 'March_LR_result.hex')  #rd ff
+    make_mix_pattern_2step('00', '00', '00', 'ff', 'a', 'March_LR_result.hex') 
+    pattern_addr_add('00000000', '007fff00', 'a', 'March_LR_result.hex')  #rd 00
+    
+# March SR
+def make_marchSR_pattern():
+    pattern_addr_sub('027fff00', '02000000', 'w', 'March_SR.hex')  #wr 00
+    make_mix_pattern_4step('03', '00', '02', 'ff', '03', '00', '02', '00', 'a', 'March_SR.hex')
+    make_mix_pattern_2step('03', '00', '03', '00', 'a', 'March_SR.hex')
+    pattern_addr_add('020000ff', '027fffff', 'a', 'March_SR.hex')  #wr ff
+    make_mix_pattern_4step_sub('03', '00', '02', '00', '03', '00', '02', 'ff', 'a', 'March_SR.hex') 
+    make_mix_pattern_2step_sub('03', '00', '03', '00', 'a', 'March_SR.hex')
 
+def make_marchSR_pattern_result():
+    make_mix_pattern_2step('00', '00', '00', 'ff', 'w', 'March_SR_result.hex') 
+    make_mix_pattern_2step('00', '00', '00', '00', 'a', 'March_SR_result.hex') 
+    make_mix_pattern_2step_sub('00', 'ff', '00', '00', 'a', 'March_SR_result.hex')
+    make_mix_pattern_2step_sub('00', 'ff', '00', 'ff', 'a', 'March_SR_result.hex')
+
+# March SS
+def make_marchSS_pattern():
+    pattern_addr_add('02000000', '027fff00', 'w', 'March_SS.hex')  #wr 00
+    make_mix_pattern_5step('03', '00', '03', '00', '02', '00', '03', '00', '02', 'ff', 'a', 'March_SS.hex')
+    make_mix_pattern_5step('03', '00', '03', '00', '02', 'ff', '03', '00', '02', '00', 'a', 'March_SS.hex')
+    make_mix_pattern_5step_sub('03', '00', '03', '00', '02', '00', '03', '00', '02', 'ff', 'a', 'March_SS.hex')
+    make_mix_pattern_5step_sub('03', '00', '03', '00', '02', 'ff', '03', '00', '02', '00', 'a', 'March_SS.hex')
+    pattern_addr_add('03000000', '037fff00', 'a', 'March_SS.hex')  #rd 00
+
+def make_marchSS_pattern_result():
+    make_mix_pattern_3step('00', '00', '00', '00', '00', '00', 'w', 'March_SS_result.hex') 
+    make_mix_pattern_3step('00', 'ff', '00', 'ff', '00', 'ff', 'a', 'March_SS_result.hex') 
+    make_mix_pattern_3step_sub('00', '00', '00', '00', '00', '00', 'a', 'March_SS_result.hex') 
+    make_mix_pattern_3step_sub('00', 'ff', '00', 'ff', '00', 'ff', 'a', 'March_SS_result.hex') 
+    pattern_addr_add('00000000', '007fff00', 'a', 'March_SS_result.hex')  #rd 00
 
 #-------------------------------------------------------------main---------------------------------------------------------#
 
@@ -392,6 +552,10 @@ if __name__ == "__main__":
     # make_marchA_pattern()
     # make_marchA_pattern_result()
 
+    # # March_B pattern
+    make_marchB_pattern()
+    make_marchB_pattern_result()
+
     # # March_C pattern
     # make_marchC_pattern()
     # make_marchC_pattern_result()
@@ -403,5 +567,7 @@ if __name__ == "__main__":
     # # March_C+ pattern
     # make_marchCp_pattern()
     # make_marchCp_pattern_result()
+
+    
 
     print('make pattern ok')
