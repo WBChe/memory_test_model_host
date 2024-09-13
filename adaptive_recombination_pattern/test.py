@@ -145,7 +145,7 @@ def get_muti_algorithm_fault(algorithm_name_list, test_num):
 
 algorithm_name = ['MSCAN', 'Checkerboard', 'MATS', 'MATS+', 'MATS++', 'March A', 'March B', 'March C', 'March C-', 'March C+', 'March U', 'March LR', 'March SR', 'March SS']
 
-algorithm_name_list = ['mscan', 'checkerboard']
+algorithm_name_list = ['MSCAN', 'Checkerboard']
 test_num = 2
 
 muti_algorithm_fault_block = get_muti_algorithm_fault(algorithm_name_list, test_num)
